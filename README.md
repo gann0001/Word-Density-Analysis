@@ -11,7 +11,7 @@ Step2:
 I used a Spacy parser which is better than Natural Language Tool Kit(NLTK) so we have to download en model for spacy
 python -m spacy download en
 
-##Step3:
+Step3:
 execute python code with below command
 python3  main.py
 
