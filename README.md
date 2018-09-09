@@ -17,11 +17,11 @@ python3  main.py
 
 
 Modules Used and Purpose:
-urllib - used to open the URL
-BeautifulSoup4 - Used to extract the data from HTML(Source Page)
-Used NLTK to remove stopwords, WordNetLemmatizer used to make words appropriate
-Spacy Parser: Extract Noun Phrases in the sentences
-re: regular expression
+1. urllib - used to open the URL
+2. BeautifulSoup4 - Used to extract the data from HTML(Source Page)
+3. Used NLTK to remove stopwords, WordNetLemmatizer used to make words appropriate
+4. Spacy Parser: Extract Noun Phrases in the sentences
+5. re: regular expression
 
 Working
 
