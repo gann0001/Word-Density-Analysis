@@ -2,12 +2,12 @@
 
 Execution Instructions:
 
-##Step1:
+Step1:
 Install virtual environment(Recommended)
 install requirement.txt in the local directory
 pip3 install -r requirements.txt
 
-##Step2:
+Step2:
 I used a Spacy parser which is better than Natural Language Tool Kit(NLTK) so we have to download en model for spacy
 python -m spacy download en
 
@@ -16,14 +16,14 @@ execute python code with below command
 python3  main.py
 
 
-##Modules Used and Purpose:
+Modules Used and Purpose:
 urllib - used to open the URL
 BeautifulSoup4 - Used to extract the data from HTML(Source Page)
 Used NLTK to remove stopwords, WordNetLemmatizer used to make words appropriate
 Spacy Parser: Extract Noun Phrases in the sentences
 re: regular expression
 
-##Working
+Working
 
 1. Initially, urllib used to open the URL
 2. BeautifulSoup4 used to extract web page data from the HTML(Source Page).
@@ -37,13 +37,12 @@ re: regular expression
 6. Stored the noun phrases and its count(Number of times it appears in the document) in the dictionary
 7. return the top few noun phrases which best describe the document
 
-##Challenges Faced:
+Challenges Faced:
 Handling the busy page
 Detect Noun Phrases from spacy features which best describe the page
 
-#Future Word:
+Future Word:
 I would like to develop an application like IBM Watson to detect sentiment of the page, Concepts of page
-
 
 
 Notes:
@@ -52,4 +51,6 @@ Another way to detect the noun phrases which best describe the document
 https://natural-language-understanding-demo.ng.bluemix.net/#url
 Open above URL and enter the web URL in URL tab and click Analyze
 we can see sentiment, concepts and many other details of the page
+
+
 
