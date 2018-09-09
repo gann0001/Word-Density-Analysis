@@ -6,13 +6,15 @@ from nltk.stem.wordnet import WordNetLemmatizer
 import spacy
 import urllib
 import urllib.request
+from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup as BS
 import en_core_web_sm
 nlp = en_core_web_sm.load()
 
 #crawl the data from web
 def crawl_web(url):
-    html = urllib.request.urlopen(url).read()
+    req = Request(url)
+    html = urlopen(req).read()
     soup = BS(html, "html.parser")
     for script in soup(["script", "style", "option", "input", "img"]):
         script.extract()
@@ -22,12 +24,14 @@ def crawl_web(url):
     text = '\n'.join(line for line in lines if line)
     return text
 
+
 #validate URL
 def validate_url(url):
     if 'http' in url or 'www' in url:
         return True
     else:
         return False
+
 
 #remove stopwords
 def remove_stopwords(parse_list):
@@ -43,6 +47,7 @@ def remove_stopwords(parse_list):
         return False
 
     return new_list
+
 
 #stem the words
 def lematize(parse_list):
@@ -69,11 +74,9 @@ def main():
 
         # Removal of stopwords
         updated_parse = remove_stopwords(parse_list)
-        print(len(updated_parse))
 
         # Lematization
         updated_parse_new = lematize(updated_parse)
-        print(len(updated_parse_new))
 
         dic = {}
         for word in updated_parse_new:
@@ -82,19 +85,17 @@ def main():
             else:
                 dic[word] = 1
 
-
         counter_dic = nltk.Counter(dic)
         # print(counter_dic.most_common())
-        print(len(counter_dic))
         if len(counter_dic) < 500:
-            for k, v in counter_dic.most_common(20):
-                print(k, v)
-        elif len(counter_dic) > 500 and len(counter_dic) < 750:
+            for k, v in counter_dic.most_common(10):
+                print(k)
+        elif len(counter_dic)>500 and len(counter_dic)<750:
             for k, v in counter_dic.most_common(15):
-                print(k, v)
+                print(k)
         else:
             for k, v in counter_dic.most_common(20):
-                print(k, v)
+                print(k)
     else:
         print('Entered URL is not valid, please enter URL again')
         main()

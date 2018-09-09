@@ -44,6 +44,9 @@ Detect Noun Phrases from spacy features which best describe the page
 Future Word:
 I would like to develop an application like IBM Watson to detect sentiment of the page, Concepts of page
 
+Github Link for this project:
+I uploaded the code to github
+https://github.com/gann0001/Word-Density-Analysis
 
 Notes:
 IBM Watson Method: I suggest to look at this one
