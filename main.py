@@ -10,7 +10,8 @@ from bs4 import BeautifulSoup as BS
 import en_core_web_sm
 nlp = en_core_web_sm.load()
 
-def Crawly(url):
+#crawl the data from web
+def crawl_web(url):
     html = urllib.request.urlopen(url).read()
     soup = BS(html, "html.parser")
     for script in soup(["script", "style", "option", "input", "img"]):
@@ -21,14 +22,14 @@ def Crawly(url):
     text = '\n'.join(line for line in lines if line)
     return text
 
-
+#validate URL
 def validate_url(url):
     if 'http' in url or 'www' in url:
         return True
     else:
         return False
 
-
+#remove stopwords
 def remove_stopwords(parse_list):
     new_list = []
     try:
@@ -43,26 +44,21 @@ def remove_stopwords(parse_list):
 
     return new_list
 
+#stem the words
 def lematize(parse_list):
     new_list = []
-    lmtzr = WordNetLemmatizer()
+    lmtzer = WordNetLemmatizer()
     for word in parse_list:
-        new_list.append(lmtzr.lemmatize(word))
+        new_list.append(lmtzer.lemmatize(word))
     return new_list
-
-
 
 
 def main():
     input_url = input("Enter the URL which you would like to analyze:")
-    # web_text = Crawly('http://www.amazon.com/Cuisinart-CPT-122-Compact-2-Slice-Toaster/dp/B009GQ034C/ref=sr_1_1?s=kitchen&ie=UTF8&qid=1431620315&sr=1-1&keywords=toaster')
-    # web_text = Crawly('http://www.cnn.com/2013/06/10/politics/edward-snowden-profile/')
-    # web_text = Crawly('http://blog.rei.com/camp/how-to-introduce-your-indoorsy-friend-to-the-outdoors/')
-
     input_url += '/'
     check_url = validate_url(input_url)
     if check_url:
-        web_text = Crawly(input_url)
+        web_text = crawl_web(input_url)
         web_text = re.sub('[!@#$():]', ' ', web_text)
         nlp = spacy.load('en_core_web_sm')
         parse_list = []
@@ -85,31 +81,24 @@ def main():
                 dic[word] += 1
             else:
                 dic[word] = 1
-        # print(dic)
+
 
         counter_dic = nltk.Counter(dic)
         # print(counter_dic.most_common())
-
-        for k, v in counter_dic.most_common(10):
-            print(k)
+        print(len(counter_dic))
+        if len(counter_dic) < 500:
+            for k, v in counter_dic.most_common(20):
+                print(k, v)
+        elif len(counter_dic) > 500 and len(counter_dic) < 750:
+            for k, v in counter_dic.most_common(15):
+                print(k, v)
+        else:
+            for k, v in counter_dic.most_common(20):
+                print(k, v)
     else:
         print('Entered URL is not valid, please enter URL again')
         main()
 
 
-
-
-
-
-
-
-
-
-main()
-
-
-
-#Validate URL
-# try catch blocks for all the methods
-#print 20 if wordcount is more than uniq words
-#read me
+if __name__ == '__main__':
+    main()
